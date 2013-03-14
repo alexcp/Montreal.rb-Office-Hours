@@ -1,6 +1,5 @@
 require 'sinatra'
 
-
 configure do
   enable :sessions
   set :root, File.dirname(__FILE__)

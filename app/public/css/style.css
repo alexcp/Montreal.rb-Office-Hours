@@ -1,0 +1,20 @@
+#bg_image{
+  background: url('/img/montrealrb_office_hours.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height:400px;
+}
+
+#title{
+  text-align: center;
+  margin-top: -200px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.container{
+  margin-top:200px;
+}
