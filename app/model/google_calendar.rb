@@ -4,7 +4,7 @@ require 'json'
 class GoogleCalendar
 
   def self.create_new_events
-    get_next_calendar_events.map { |calendar_event| Event.new calendar_event["id"], Time.parse(calendar_event["start"]["dateTime"]) }
+    get_next_calendar_events.map { |calendar_event| Event.new calendar_event["id"], calendar_event["start"]["dateTime"] }
   end
 
 
