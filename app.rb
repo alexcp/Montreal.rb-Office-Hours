@@ -1,4 +1,5 @@
 require 'sinatra'
+require_relative 'app/model/event'
 require_relative 'app/model/google_calendar'
 
 

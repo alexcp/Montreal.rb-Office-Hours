@@ -3,12 +3,17 @@ require 'json'
 
 class GoogleCalendar
 
-  def self.get_next_events
-    next_events = JSON.parse search_for_future_events
+  def self.create_new_events
+    get_next_calendar_events.map { |calendar_event| Event.new calendar_event["id"], Time.parse(calendar_event["start"]["dateTime"]) }
+  end
+
+
+  def self.get_next_calendar_events
+    next_events = JSON.parse search_for_future_calendar_events
     next_events["items"]
   end
 
-  def self.search_for_future_events
+  def self.search_for_future_calendar_events
     uri = URI.parse(" https://www.googleapis.com/calendar/v3/calendars/4b3vms6i8vm26lvg69d7ncobec%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&q=Montreal.rb+Office+Hours&timeMin=#{Time.now.strftime("%FT%T%:z")}&fields=items(id%2Cstart)&key=#{ENV['GOOGLE_API_KEY']}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
