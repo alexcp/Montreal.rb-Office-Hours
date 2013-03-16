@@ -1,4 +1,6 @@
 require 'sinatra'
+require_relative 'app/model/google_calendar'
+
 
 configure do
   enable :sessions
