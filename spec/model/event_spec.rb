@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Event do
   before :each do
+    Redis.new.zremrangebyrank :event, 0, -1
     @event = Event.new "12-03-2013"
   end
 

@@ -22,7 +22,7 @@ class Event
   def self.current
     current = all.first
     remove(current) if has_expired?(current)
-    all.first
+    all.first  
   end
 
   def self.all
@@ -31,6 +31,7 @@ class Event
 
   def self.remove(date)
     Redis.new.zrem :event, date
+    Attending.delete_list_with(date)
   end
 
   def self.has_expired?(date)
