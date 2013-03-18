@@ -4,6 +4,7 @@ describe Event do
   before :each do
     Redis.new.zremrangebyrank :event, 0, -1
     @event = Event.new "12-03-2013"
+    GoogleCalendar.stub create_new_events: true
   end
 
   it "should save new event to redis" do

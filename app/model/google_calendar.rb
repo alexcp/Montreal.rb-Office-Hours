@@ -7,6 +7,7 @@ class GoogleCalendar
     get_next_calendar_events.map { |calendar_event| Event.new calendar_event["start"]["dateTime"] }
   end
 
+  private
 
   def self.get_next_calendar_events
     next_events = JSON.parse search_for_future_calendar_events
