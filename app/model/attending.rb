@@ -9,6 +9,10 @@ class Attending
     Redis.new.hgetall("Attending:#{Event.current}").values
   end
 
+  def self.delete_list_with(date)
+    Redis.new.del "Attending:#{date}"
+  end
+
   private
 
   def initialize user_info
@@ -20,9 +24,5 @@ class Attending
 
   def save
     Redis.new.hset "Attending:#{Event.current}", @username, {username: @username, avatar: @avatar, url: @url}
-  end
-
-  def self.delete_list_with(date)
-    Redis.new.del "Attending:#{date}"
   end
 end
