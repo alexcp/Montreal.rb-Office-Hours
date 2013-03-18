@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Attending do
   it "should save new to a set" do
     info = {"login"=>"alexcp","html_url"=>"","avatar_url"=>""} 
-    Attending.new info
+    Attending.add info
   end
 
   it "should list user attending the current event" do

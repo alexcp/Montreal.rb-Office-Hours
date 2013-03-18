@@ -36,9 +36,9 @@ get '/auth/github' do
 end
  
 get '/auth/github/callback' do
-  access_token = client.auth_code.get_token(params[:code], :redirect_uri => redirect_uri)
-  user_info = JSON.parse(access_token.get("https://api.github.com/user").body)
-  Attending.new user_info
+  access_token = client.auth_code.get_token params[:code], redirect_uri: redirect_uri
+  user = JSON.parse access_token.get("https://api.github.com/user").body
+  Attending.add user
   redirect to('/')
 end
  
