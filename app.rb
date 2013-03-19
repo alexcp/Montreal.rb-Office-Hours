@@ -2,9 +2,8 @@ require 'sinatra'
 require 'oauth2'
 require 'json'
 require_relative 'app/model/event'
-require_relative 'app/model/google_calendar'
+require_relative 'app/model/calendar'
 require_relative 'app/model/attending'
-
 
 configure do
   enable :sessions
@@ -17,16 +16,9 @@ get '/' do
   erb :index
 end
 
-get '/t' do
-  %(<p>Update the <code>#new_client</code> method in the sinatra app and <a href="/auth/github">try to authorize</a>.</p>)
-end
-
-def client
-  OAuth2::Client.new ENV['GITHUB_CLIENT_ID'],
-                     ENV['GITHUB_CLIENT_SECRET'],
-                     site: 'https://github.com',
-                     authorize_url: 'https://github.com/login/oauth/authorize',
-                     token_url: 'https://github.com/login/oauth/access_token'
+get '/attendings' do
+  content_type :json
+  Attending.list.to_json
 end
 
 get '/auth/github' do
@@ -40,6 +32,14 @@ get '/auth/github/callback' do
   user = JSON.parse access_token.get("https://api.github.com/user").body
   Attending.add user
   redirect to('/')
+end
+
+def client
+  OAuth2::Client.new ENV['GITHUB_CLIENT_ID'],
+                     ENV['GITHUB_CLIENT_SECRET'],
+                     site: 'https://github.com',
+                     authorize_url: 'https://github.com/login/oauth/authorize',
+                     token_url: 'https://github.com/login/oauth/access_token'
 end
  
 def redirect_uri(path = '/auth/github/callback', query = nil)

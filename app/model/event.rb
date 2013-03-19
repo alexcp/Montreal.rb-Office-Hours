@@ -37,7 +37,7 @@ class Event
 
   def self.update date
     remove date
-    GoogleCalendar.create_new_events if all.count <= 1
+    Calendar.create_new_events if all.count <= 1
   end
 
   def self.remove date
