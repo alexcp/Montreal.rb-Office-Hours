@@ -12,10 +12,6 @@ configure do
   set :views, Proc.new { File.join(root, "app/views") }
 end
 
-get '/' do
-  erb :index
-end
-
 get '/attendings' do
   content_type :json
   Attending.list
