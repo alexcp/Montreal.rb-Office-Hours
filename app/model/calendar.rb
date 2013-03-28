@@ -5,6 +5,8 @@ class Calendar
 
   def self.create_new_events
     get_next_calendar_events.map { |calendar_event| Event.new calendar_event["start"]["dateTime"] }
+  rescue NoMethodError
+    []
   end
 
   private
