@@ -14,12 +14,12 @@ end
 
 get '/next_event' do
   content_type :json
-  Event.current
+  {"date"=>Event.current}.to_json
 end
 
 get '/attendings' do
   content_type :json
-  Attending.list
+  Attending.list.to_json
 end
 
 get '/auth/github' do

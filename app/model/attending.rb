@@ -7,7 +7,7 @@ class Attending
   
   def self.list
     redis = Redis.new
-    redis.hgetall("Attending:#{Event.current}").values.to_json
+    redis.hgetall("Attending:#{Event.current}").values.map {|x|JSON.parse(x)}
   ensure
     redis.quit
   end
@@ -29,6 +29,6 @@ class Attending
   end
 
   def save
-    Redis.new.hset "Attending:#{Event.current}", @username, {username: @username, avatar: @avatar, url: @url}
+    Redis.new.hset "Attending:#{Event.current}", @username, {username: @username, avatar: @avatar, url: @url}.to_json
   end
 end
