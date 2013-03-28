@@ -6,11 +6,17 @@ class Attending
   end
   
   def self.list
-    Redis.new.hgetall("Attending:#{Event.current}").values.to_json
+    redis = Redis.new
+    redis.hgetall("Attending:#{Event.current}").values.to_json
+  ensure
+    redis.quit
   end
 
   def self.delete_list_with(date)
-    Redis.new.del "Attending:#{date}"
+    redis = Redis.new
+    redis.del "Attending:#{date}"
+  ensure
+    redis.quit
   end
 
   private
