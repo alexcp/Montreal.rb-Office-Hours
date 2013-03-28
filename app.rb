@@ -18,7 +18,7 @@ end
 
 get '/attendings' do
   content_type :json
-  Attending.list.to_json
+  Attending.list
 end
 
 get '/auth/github' do
