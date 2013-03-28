@@ -12,6 +12,11 @@ configure do
   set :views, Proc.new { File.join(root, "app/views") }
 end
 
+get '/next_event' do
+  content_type :json
+  Event.current
+end
+
 get '/attendings' do
   content_type :json
   Attending.list
