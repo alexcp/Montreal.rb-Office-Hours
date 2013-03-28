@@ -15,7 +15,7 @@ class Calendar
   end
 
   def self.search_for_future_calendar_events
-    uri = URI.parse(" https://www.googleapis.com/calendar/v3/calendars/4b3vms6i8vm26lvg69d7ncobec%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&q=Montreal.rb+Office+Hours&timeMin=#{Time.now.strftime("%FT%T%:z")}&fields=items(id%2Cstart)&key=#{ENV['GOOGLE_API_KEY']}")
+    uri = URI.parse("https://www.googleapis.com/calendar/v3/calendars/j2tp04gen46s0e097fsgcs2s4k%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&q=Montreal.rb+Office+Hours&timeMin=#{Time.now.strftime("%FT%T%:z")}&fields=items(id%2Cstart)&key=#{ENV['GOOGLE_API_KEY']}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
