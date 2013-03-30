@@ -1,22 +1,14 @@
-require 'redis'
-
 class Attending
   def self.add user_info
     new user_info
   end
   
   def self.list
-    redis = Redis.new
-    redis.hgetall("Attending:#{Event.current}").values.map {|x|JSON.parse(x)}
-  ensure
-    redis.quit
+    Database.hgetall("Attending:#{Event.current}").values.map {|x|JSON.parse(x)}
   end
 
   def self.delete_list_with(date)
-    redis = Redis.new
-    redis.del "Attending:#{date}"
-  ensure
-    redis.quit
+    Database.del "Attending:#{date}"
   end
 
   private
@@ -29,6 +21,6 @@ class Attending
   end
 
   def save
-    Redis.new.hset "Attending:#{Event.current}", @username, {username: @username, avatar: @avatar, url: @url}.to_json
+    Database.hset "Attending:#{Event.current}", @username, {username: @username, avatar: @avatar, url: @url}.to_json
   end
 end

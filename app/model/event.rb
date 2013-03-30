@@ -1,4 +1,3 @@
-require 'redis'
 require 'time'
 
 class Event
@@ -18,26 +17,17 @@ class Event
   end
 
   def exist?
-    redis = Redis.new 
-    return redis.zscore :event, date
-  ensure
-    redis.quit
+    Database.zscore :event, date
   end
 
   private
 
   def save
-    redis = Redis.new
-    redis.zadd :event, id, date  unless exist?
-  ensure
-    redis.quit
+    Database.zadd :event, id, date  unless exist?
   end
 
   def self.all
-    redis = Redis.new
-    redis.zrange :event, 0, -1
-  ensure
-    redis.quit
+    Database.zrange :event, 0, -1
   end
 
   def self.has_expired? date
@@ -50,10 +40,7 @@ class Event
   end
 
   def self.remove date
-    redis = Redis.new
-    redis.zrem :event, date
+    Database.zrem :event, date
     Attending.delete_list_with date
-  ensure
-    redis.quit
   end
 end

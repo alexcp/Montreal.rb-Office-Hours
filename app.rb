@@ -4,6 +4,7 @@ require 'json'
 require_relative 'app/model/event'
 require_relative 'app/model/calendar'
 require_relative 'app/model/attending'
+require_relative 'app/model/database'
 
 configure do
   enable :sessions
