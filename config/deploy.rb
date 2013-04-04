@@ -23,11 +23,11 @@ set :deploy_to, "/home/#{user}/app/#{application}"
 
 namespace :deploy do
   task :start, :roles => [:web, :app] do
-    run "cd #{deploy_to}/current && bundle exec thin start -d -P=thin/server.pid -l=thin/prod.log"
+    run "cd #{deploy_to}/current && bundle exec thin start -d -P=thin/server.pid -l=thin/prod.log -e=production"
   end
 
   task :stop, :roles => [:web, :app] do
-    run "cd #{deploy_to}/current && bundle exec thin stop -P=thin/server.pid "
+    run "cd #{deploy_to}/current && bundle exec thin stop -P=thin/server.pid"
   end
 
   task :restart, :roles => [:web, :app] do
