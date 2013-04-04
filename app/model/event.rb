@@ -32,6 +32,8 @@ class Event
 
   def self.has_expired? date
     Time.parse(date).to_f < Time.now.to_f - ONE_DAY
+  rescue TypeError
+    true
   end
 
   def self.update date
