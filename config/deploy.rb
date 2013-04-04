@@ -1,3 +1,4 @@
+require "rvm/capistrano"
 require "bundler/capistrano"
 set :application, "office_hours"
 set :repository,  "git://github.com/alexcp/Montreal.rb-Office-Hours.git"
