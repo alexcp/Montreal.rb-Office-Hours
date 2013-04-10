@@ -2,3 +2,4 @@
 //= require bootstrap.min
 //= require underscore-min
 //= require home
+//= require analytics
