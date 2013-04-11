@@ -1,8 +1,8 @@
 require 'time'
+require 'active_support/core_ext/numeric/time'
 
 class Event
   attr_reader :id, :date
-  ONE_DAY = 86400
 
   def initialize date
     @id = Time.parse(date).to_f
@@ -31,7 +31,8 @@ class Event
   end
 
   def self.has_expired? date
-    Time.parse(date).to_f < Time.now.to_f - ONE_DAY
+    # The event will expires 2 hours after is date
+    Time.parse(date).to_f < Time.now.to_f - 2.hours.to_i
   rescue TypeError
     true
   end
