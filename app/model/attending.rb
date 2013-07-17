@@ -2,6 +2,10 @@ class Attending
   def self.add user_info
     new user_info
   end
+
+  def self.delete_user_with(username)
+    Database.hdel "Attending:#{Event.current}", username
+  end
   
   def self.list
     Database.hgetall("Attending:#{Event.current}").values.map {|x|JSON.parse(x)}
