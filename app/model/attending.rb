@@ -3,7 +3,7 @@ class Attending
     new user_info
   end
 
-  def self.delete_user_with(username)
+  def self.cancel(username)
     Database.hdel "Attending:#{Event.current}", username
   end
   

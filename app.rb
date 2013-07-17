@@ -32,7 +32,13 @@ end
 get '/auth/github/callback' do
   access_token = client.auth_code.get_token params[:code], redirect_uri: redirect_uri
   user = JSON.parse access_token.get("https://api.github.com/user").body
-  Attending.add user
+
+  if Attending.exists?(user["login"])
+    Attending.cancel user["login"]
+  else
+    Attending.add user
+  end
+  
   redirect to('/')
 end
 

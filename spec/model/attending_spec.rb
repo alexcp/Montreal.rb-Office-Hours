@@ -23,7 +23,7 @@ describe Attending do
   end
 
   it "should delete user from attending list" do
-    Attending.delete_user_with user1["login"]
+    Attending.cancel user1["login"]
     Attending.list.should have(1).items
   end
 end
