@@ -18,6 +18,10 @@ describe Attending do
     Attending.list.should have(2).items
   end
 
+  it "should find user attendance by username" do
+    Attending.exists?(user1["login"]).should be_true
+  end
+
   it "should delete user from attending list" do
     Attending.delete_user_with user1["login"]
     Attending.list.should have(1).items

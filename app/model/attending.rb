@@ -15,6 +15,10 @@ class Attending
     Database.del "Attending:#{date}"
   end
 
+  def self.exists?(username)
+    Database.hexists("Attending:#{Event.current}", username)
+  end
+
   private
 
   def initialize user_info
